@@ -3,12 +3,12 @@
 
     <div class="form-group col-md-3">
       <label for="departureAirportCode">{{ 'flightSearch.departureAirportCode' | translate }}</label>
-      <input type="text" class="form-control" id="departureAirportCode" [(ngModel)]="departureAirportCode">
+      <input type="text" class="form-control" id="departureAirportCode" [(ngModel)]="departureAirportCode" maxlength="3">
     </div>
 
     <div class="form-group col-md-3">
       <label for="arrivalAirportCode">{{ 'flightSearch.arrivalAirportCode' | translate }}</label>
-      <input type="text" class="form-control input-group-sm" id="arrivalAirportCode" [(ngModel)]="arrivalAirportCode">
+      <input type="text" class="form-control input-group-sm" id="arrivalAirportCode" [(ngModel)]="arrivalAirportCode" maxlength="3">
     </div>
 
     <div class="form-group col-md-2">
