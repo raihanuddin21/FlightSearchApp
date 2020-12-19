@@ -1,40 +1,59 @@
 <div class="container mt-5" [ngBusy]="busy">
-  <div class="row">
 
-    <div class="form-group col-md-3">
-      <label for="departureAirportCode">{{ 'flightSearch.departureAirportCode' | translate }}</label>
-      <input type="text" class="form-control" id="departureAirportCode" [(ngModel)]="departureAirportCode" maxlength="3">
+  <form [formGroup]="searchForm">
+    <div class="row">
+
+      <div class="form-group col-md-3">
+        <kendo-formfield [showErrors]="'initial'">
+          <label for="departureAirportCode">{{ 'flightSearch.departureAirportCode' | translate }}</label>
+          <input type="text" kendoTextBox class="form-control" id="departureAirportCode"
+            [(ngModel)]="departureAirportCode" minlength="3" maxlength="3" formControlName="departureAirportCode">
+          <kendo-formerror>Error: Please input three character</kendo-formerror>
+        </kendo-formfield>
+      </div>
+
+      <div class="form-group col-md-3">
+        <kendo-formfield [showErrors]="'initial'">
+          <label for="arrivalAirportCode">{{ 'flightSearch.arrivalAirportCode' | translate }}</label>
+          <input type="text" kendoTextBox class="form-control input-group-sm" id="arrivalAirportCode"
+            [(ngModel)]="arrivalAirportCode" minlength="3" maxlength="3" formControlName="arrivalAirportCode">
+          <kendo-formerror>Error: Please input three character</kendo-formerror>
+        </kendo-formfield>
+      </div>
+
+      <div class="form-group col-md-2">
+        <kendo-formfield [showErrors]="'initial'">
+          <label for="departureDate">{{ 'flightSearch.departureDate' | translate }}</label>
+          <kendo-datepicker id="departureDate" class="form-control" [(ngModel)]="departureDate" [format]="'dd MMM yyyy'"
+            formControlName="departureDate">
+          </kendo-datepicker>
+          <kendo-formerror>Error: Please input a valid date</kendo-formerror>
+        </kendo-formfield>
+      </div>
+
+      <div class="form-group col-md-2">
+        <kendo-formfield [showErrors]="'initial'">
+          <label for="returnDate">{{ 'flightSearch.returnDate' | translate }}</label>
+          <kendo-datepicker id="returnDate" class="form-control" [(ngModel)]="returnDate" [format]="'dd MMM yyyy'"
+            formControlName="returnDate">
+          </kendo-datepicker>
+          <kendo-formerror>Error: Please input a valid date</kendo-formerror>
+        </kendo-formfield>
+      </div>
+
+      <div class="form-group mt-2 col-md-2">
+        <br />
+        <button class="btn btn-info btn-block" style="float: right" (click)="search();"><i class="fa fa-search"></i>        
+          {{ 'flightSearch.search' | translate }}
+        </button>
+      </div>
+
     </div>
-
-    <div class="form-group col-md-3">
-      <label for="arrivalAirportCode">{{ 'flightSearch.arrivalAirportCode' | translate }}</label>
-      <input type="text" class="form-control input-group-sm" id="arrivalAirportCode" [(ngModel)]="arrivalAirportCode" maxlength="3">
-    </div>
-
-    <div class="form-group col-md-2">
-      <label for="departureDate">{{ 'flightSearch.departureDate' | translate }}</label>
-      <kendo-datepicker id="departureDate" class="form-control" [(ngModel)]="departureDate" [format]="'dd MMM yyyy'">
-      </kendo-datepicker>
-    </div>
-
-    <div class="form-group col-md-2">
-      <label for="returnDate">{{ 'flightSearch.returnDate' | translate }}</label>
-      <kendo-datepicker id="returnDate" class="form-control" [(ngModel)]="returnDate" [format]="'dd MMM yyyy'">
-      </kendo-datepicker>
-    </div>
-
-    <div class="form-group mt-2 col-md-2">
-      <br />
-      <button class="btn btn-info btn-block" style="float: right" (click)="search();"><i class="fa fa-search"></i>
-        {{ 'flightSearch.search' | translate }}
-      </button>
-    </div>
-
-  </div>
+  </form>
 
   <div class="row">
     <kendo-grid [data]="flights" [resizable]="true" style="margin: 14px" [height]="700">
-      
+
       <kendo-grid-column [headerStyle]="{'text-align': 'center'}" [style]="{'text-align': 'center'}">
         <ng-template kendoGridHeaderTemplate>
           {{ 'flightSearch.airlineLogo' | translate }}

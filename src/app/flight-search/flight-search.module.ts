@@ -6,6 +6,8 @@ import { GridModule } from '@progress/kendo-angular-grid';
 import { FlightSearchRoutingModule } from './flight-search.routing.module';
 import { LanguageTranslateModule } from '../language-translate/language-translate.module';
 import { NgBusyModule } from 'ng-busy';
+import { LabelModule } from '@progress/kendo-angular-label';
+import { InputsModule } from '@progress/kendo-angular-inputs';
 
 @NgModule({
   imports: [
@@ -13,14 +15,15 @@ import { NgBusyModule } from 'ng-busy';
     ReactiveFormsModule,
     LanguageTranslateModule,
     DatePickerModule,
-    FormsModule,
     GridModule,
     DateInputsModule,
     FlightSearchRoutingModule,
-    NgBusyModule
+    NgBusyModule,
+    InputsModule,
+    LabelModule
   ],
   declarations: [
-      FlightSearchComponent
+    FlightSearchComponent
   ],
   providers: [
   ]
