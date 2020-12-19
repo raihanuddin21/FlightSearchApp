@@ -17,6 +17,10 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     CommonModule,
     HttpClientModule,
+  //   TranslateModule.forChild({
+  //     loader: {provide: TranslateLoader, useFactory: HttpLoaderFactory, deps: [HttpClient], },
+  //     extend: true
+  // }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

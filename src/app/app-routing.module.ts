@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { FlightSearchComponent } from './flight-search/flight-search.component';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'flight-search', component: FlightSearchComponent },
+  { path: 'flight-search', loadChildren: () => import('./flight-search/flight-search.module').then(m => m.FlightSearchModule) },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 

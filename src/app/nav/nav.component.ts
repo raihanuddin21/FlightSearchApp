@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { CurrentLanguageService } from '../_services/current-language.service';
 
 @Component({
   selector: 'app-nav',
@@ -9,15 +10,16 @@ import { TranslateService } from '@ngx-translate/core';
 export class NavComponent implements OnInit {
   language: string;
 
-  constructor(private translateService: TranslateService) { }
+  constructor(public translateService: TranslateService, private currentLanguageService: CurrentLanguageService) { }
 
   ngOnInit() {
-    this.language = 'en';
-    this.translateService.setDefaultLang(this.language);
+    this.selectedLanguage('en');
   }
 
-  selectedLanguage(lang: string) {
+  selectedLanguage(lang: string) {    
     this.language = lang;
+    this.currentLanguageService.code = this.language;
+    this.currentLanguageService.emitLanguageChangeEvent(this.language);
     this.translateService.setDefaultLang(this.language);
   }
   

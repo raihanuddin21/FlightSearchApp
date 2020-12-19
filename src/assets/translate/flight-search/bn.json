@@ -3,7 +3,7 @@
       "departureAirportCode": "বিমানবন্দর প্রস্থান কোড",
       "arrivalAirportCode": "বিমানবন্দর আগমন কোড",
       "departureDate": "প্রস্থান তারিখ",
-      "returnDate": "প্রস্থান তারিখ",
+      "returnDate": "প্রত্যাবর্তন তারিখ",
       "airlineLogo": "বিমানের লোগো",
       "airlineName": "বিমানের নাম",
       "outboundFlightDuration": "বহির্গামী ফ্লাইট সময়কাল",
