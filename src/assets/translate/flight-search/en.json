@@ -1,0 +1,14 @@
+{
+    "flightSearch": {
+      "departureAirportCode": "Departure Airport Code",
+      "arrivalAirportCode": "Arrival Airport Code",
+      "departureDate": "Departure Date",
+      "returnDate": "Return Date",
+      "airlineLogo": "Airline Logo",
+      "airlineName": "Airline Name",
+      "outboundFlightDuration": "Outbound Flight Duration",
+      "inboundFlightDuration": "Inbound Flight Duration",
+      "totalAmountInUSD": "Total Amount In USD",
+      "search": "Search"
+    }
+  }
