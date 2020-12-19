@@ -43,7 +43,7 @@
 
       <div class="form-group mt-2 col-md-2">
         <br />
-        <button class="btn btn-info btn-block" style="float: right" (click)="search();"><i class="fa fa-search"></i>        
+        <button class="btn btn-info btn-block" style="float: right" (click)="search();"><i class="fa fa-search"></i>
           {{ 'flightSearch.search' | translate }}
         </button>
       </div>
@@ -52,7 +52,21 @@
   </form>
 
   <div class="row">
-    <kendo-grid [data]="flights" [resizable]="true" style="margin: 14px" [height]="700">
+    <kendo-grid 
+        [data]="gridView" 
+        [pageSize]="pageSize" 
+        [skip]="skip" 
+        [pageable]="{
+            buttonCount: buttonCount,
+            info: info,
+            type: type,
+            pageSizes: pageSizes,
+            previousNext: previousNext
+        }" 
+        scrollable="none" 
+        (pageChange)="pageChange($event)"
+        [resizable]="true" 
+        style="margin: 14px">
 
       <kendo-grid-column [headerStyle]="{'text-align': 'center'}" [style]="{'text-align': 'center'}">
         <ng-template kendoGridHeaderTemplate>
