@@ -1,12 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, MinLengthValidator, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
+import { DataStateChangeEvent, GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
 import { Subscription } from 'rxjs';
 import { Flight } from '../_models/flight';
 import { AlertifyService } from '../_services/alertify.service';
 import { CurrentLanguageService } from '../_services/current-language.service';
 import { FlightService } from '../_services/flight.service';
+import { process, State } from '@progress/kendo-data-query';
 
 @Component({
   selector: 'app-flight-search',
@@ -14,14 +15,7 @@ import { FlightService } from '../_services/flight.service';
   styleUrls: ['./flight-search.component.scss']
 })
 export class FlightSearchComponent implements OnInit, OnDestroy {
-  public gridView: GridDataResult;
-  public type = 'numeric';
-  public buttonCount = 10;
-  public info = true;
-  public pageSizes = [20,50,100];
-  public previousNext = true;
-  public pageSize = 20;
-  public skip = 0;
+  public gridData: GridDataResult;
 
   searchForm: FormGroup;
   public busy: Subscription;
@@ -32,7 +26,7 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
   public departureDate: Date = new Date();
   public returnDate: Date = new Date();
 
-  flights: Flight[];
+  flights: Flight[] = [];
 
   constructor(private flightService: FlightService,
     private translateService: TranslateService,
@@ -69,18 +63,9 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
         (x) => { this.alertify.error('Problem retrieving data'); },
         () => { this.loadGridData() }));
   }
-
+  
   loadGridData(): void {
-    this.gridView = {
-      data: this.flights.slice(this.skip, this.skip + this.pageSize),
-      total: this.flights.length
-    };
-  }
-
-  public pageChange({ skip, take }: PageChangeEvent): void {
-    this.skip = skip;
-    this.pageSize = take;
-    this.loadGridData();
+    this.gridData = process(this.flights, this.state);
   }
 
   changeLanguage() {
@@ -92,5 +77,15 @@ export class FlightSearchComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(subscription => {
       subscription.unsubscribe();
     });
+  }
+
+  public state: State = {
+    skip: 0,
+    take: 15,
+  };
+
+  public dataStateChange(state: DataStateChangeEvent): void {
+    this.state = state;
+    this.gridData = process(this.flights, this.state);
   }
 }

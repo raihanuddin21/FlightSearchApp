@@ -53,22 +53,19 @@
 
   <div class="row">
     <kendo-grid 
-        [data]="gridView" 
-        [pageSize]="pageSize" 
-        [skip]="skip" 
-        [pageable]="{
-            buttonCount: buttonCount,
-            info: info,
-            type: type,
-            pageSizes: pageSizes,
-            previousNext: previousNext
-        }" 
-        scrollable="none" 
-        (pageChange)="pageChange($event)"
+        [data]="gridData" 
+        [pageSize]="state.take" 
+        [skip]="state.skip"
+        [sort]="state.sort"
+        [filter]="state.filter"
+        [sortable]="true"
+        [pageable]="true"
+        filterable="menu"
+        (dataStateChange)="dataStateChange($event)"
         [resizable]="true" 
         style="margin: 14px">
 
-      <kendo-grid-column [headerStyle]="{'text-align': 'center'}" [style]="{'text-align': 'center'}">
+      <kendo-grid-column [headerStyle]="{'text-align': 'center'}" [style]="{'text-align': 'center'}" [filterable]="false">
         <ng-template kendoGridHeaderTemplate>
           {{ 'flightSearch.airlineLogo' | translate }}
         </ng-template>
